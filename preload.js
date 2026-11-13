@@ -1,1 +1,16 @@
-const {contextBridge,ipcRenderer}=require('electron');contextBridge.exposeInMainWorld('api',{load:()=>ipcRenderer.invoke('db:load'),save:d=>ipcRenderer.invoke('db:save',d),export:d=>ipcRenderer.invoke('db:export',d),import:()=>ipcRenderer.invoke('db:import'),open:url=>ipcRenderer.invoke('open:external',url),attachFile:id=>ipcRenderer.invoke('file:attach',id),openFile:name=>ipcRenderer.invoke('file:open',name),notify:(title,body)=>ipcRenderer.invoke('app:notify',title,body),previewLetter:html=>ipcRenderer.invoke('letter:preview',html)});
+const { contextBridge, ipcRenderer } = require("electron");
+contextBridge.exposeInMainWorld("api", {
+    getVersion: () => ipcRenderer.invoke("app:version"),
+    load: () => ipcRenderer.invoke("db:load"),
+    save: (d) => ipcRenderer.invoke("db:save", d),
+    export: (d) => ipcRenderer.invoke("db:export", d),
+    import: () => ipcRenderer.invoke("db:import"),
+    mergePreview: () => ipcRenderer.invoke("db:merge:preview"),
+    mergeCommit: () => ipcRenderer.invoke("db:merge:commit"),
+    mergeCancel: () => ipcRenderer.invoke("db:merge:cancel"),
+    open: (url) => ipcRenderer.invoke("open:external", url),
+    attachFile: (id) => ipcRenderer.invoke("file:attach", id),
+    openFile: (name) => ipcRenderer.invoke("file:open", name),
+    notify: (title, body) => ipcRenderer.invoke("app:notify", title, body),
+    previewLetter: (html) => ipcRenderer.invoke("letter:preview", html),
+});

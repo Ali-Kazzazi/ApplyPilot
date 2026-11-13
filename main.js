@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const fs = require("fs");
 const path = require("path");
+const { merge } = require("./merge");
+let pendingMerge = null;
 let win;
 const empty = () => ({
   universities: [],
@@ -82,6 +84,7 @@ function create() {
   win.removeMenu();
 }
 app.whenReady().then(() => {
+  ipcMain.handle("app:version", () => app.getVersion());
   ipcMain.handle("letter:preview", (_, html) => openLetterPreview(html));
   ipcMain.handle("file:attach", async (_, id) => {
     let r = await dialog.showOpenDialog(win, { properties: ["openFile"] });
@@ -120,6 +123,42 @@ app.whenReady().then(() => {
     });
     if (r.canceled) return false;
     fs.writeFileSync(r.filePath, JSON.stringify(data, null, 2));
+    return true;
+  });
+  ipcMain.handle("db:merge:preview", async () => {
+    let r = await dialog.showOpenDialog(win, {
+      properties: ["openFile"],
+      filters: [{ name: "JSON", extensions: ["json"] }],
+    });
+    if (r.canceled) return null;
+    const imported = JSON.parse(fs.readFileSync(r.filePaths[0], "utf8"));
+    const plan = merge(load(), imported);
+    pendingMerge = {
+      file: r.filePaths[0],
+      snapshot: JSON.stringify(load()),
+      plan,
+    };
+    return {
+      fileName: path.basename(r.filePaths[0]),
+      stats: plan.stats,
+      totals: plan.totals,
+    };
+  });
+  ipcMain.handle("db:merge:commit", () => {
+    if (!pendingMerge) throw Error("No merge preview is pending");
+    if (JSON.stringify(load()) !== pendingMerge.snapshot) {
+      pendingMerge = null;
+      throw Error(
+        "The database changed since preview. Please review the merge again.",
+      );
+    }
+    const next = pendingMerge.plan.data;
+    save(next);
+    pendingMerge = null;
+    return next;
+  });
+  ipcMain.handle("db:merge:cancel", () => {
+    pendingMerge = null;
     return true;
   });
   ipcMain.handle("db:import", async () => {

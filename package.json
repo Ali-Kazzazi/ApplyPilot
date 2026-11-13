@@ -1,4 +1,19 @@
 {
+  "name": "applypilot",
+  "version": "2.0.0",
+  "description": "Offline university application tracker",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "node --test history.test.js",
+    "build": "electron-builder --win",
+    "build:portable": "electron-builder --win portable",
+    "build:installer": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^44.9.0"
+  },
   "build": {
     "appId": "com.applypilot.desktop",
     "productName": "ApplyPilot",
@@ -33,18 +48,7 @@
       "createStartMenuShortcut": true
     }
   },
-  "name": "applypilot",
-  "version": "1.0.0",
-  "description": "PhD and Master's Application Manager",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-builder --win",
-    "build:portable": "electron-builder --win portable",
-    "build:installer": "electron-builder --win nsis"
-  },
-  "devDependencies": {
-    "electron": "^44.8.0",
-    "electron-builder": "^26.5.0"
+  "dependencies": {
+    "electron-builder": "^25.1.0"
   }
 }
