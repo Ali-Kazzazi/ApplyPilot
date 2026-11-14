@@ -49,6 +49,8 @@ The editing toolbar remains available in the letter editor. Close the preview us
 
 ## Merge JSON databases
 
+To prepare a research file with a web-enabled AI, use the [research prompt](database-research-prompt.md), [blank template](database-template.json), and [JSON Schema](database.schema.json).
+
 Go to **Settings & backup → Merge JSON files**, choose another ApplyPilot JSON backup, review the category-by-category preview and confirm. The merge adds new records, skips existing records with the same IDs, matches universities by name and country and professors by name and university, and remaps IDs on conflicts. It does **not** overwrite existing records or merge settings. A `.bak` copy of the pre-merge database is created alongside your local `applypilot.json` when that file exists.
 
 Note: Attached documents are not included in JSON backups; merge operates on JSON metadata only. Links to local attachments from another computer may not work. Keep a backup and verify linked records after merging. The operation is intended for trusted ApplyPilot JSON files.

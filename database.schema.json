@@ -1,0 +1,626 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplyPilot database for generated JSON files",
+  "description": "Authoring schema for full-shaped research batches or exports. Cross-record IDs and calendar validity need separate checks. ApplyPilot does not enforce this schema at runtime.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "universities",
+    "professors",
+    "positions",
+    "letters",
+    "events",
+    "tasks",
+    "correspondence",
+    "documents",
+    "checklistItems",
+    "settings"
+  ],
+  "properties": {
+    "universities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/universities"
+      }
+    },
+    "professors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/professors"
+      }
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/positions"
+      }
+    },
+    "letters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/letters"
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/events"
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tasks"
+      }
+    },
+    "correspondence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/correspondence"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/documents"
+      }
+    },
+    "checklistItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/checklistItems"
+      }
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "yourName": {
+          "type": "string"
+        },
+        "comparisonIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "maxItems": 4,
+          "uniqueItems": true
+        },
+        "checklistPosition": {
+          "$ref": "#/$defs/optionalId"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "optionalId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]*$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^(?:|[0-9]{4}-[0-9]{2}-[0-9]{2})$"
+    },
+    "time": {
+      "type": "string",
+      "pattern": "^(?:|(?:[01][0-9]|2[0-3]):[0-5][0-9])$"
+    },
+    "universities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "ranking": {
+          "type": "string"
+        },
+        "acceptanceRate": {
+          "type": "string"
+        },
+        "deadline": {
+          "$ref": "#/$defs/date"
+        },
+        "scholarship": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "tuition": {
+          "type": "string"
+        },
+        "applicationFee": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "funding": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "professors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "universityId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "department": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "research": {
+          "type": "string"
+        },
+        "publications": {
+          "type": "string"
+        },
+        "fit": {
+          "enum": [
+            "",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "website": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "",
+            "Not contacted",
+            "Draft ready",
+            "Contacted",
+            "Replied",
+            "Interested",
+            "Not available"
+          ]
+        },
+        "lastContact": {
+          "$ref": "#/$defs/date"
+        },
+        "followUp": {
+          "$ref": "#/$defs/date"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "positions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "degree": {
+          "enum": [
+            "",
+            "PhD",
+            "Master",
+            "Research assistant",
+            "Other"
+          ]
+        },
+        "universityId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "professorId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "field": {
+          "type": "string"
+        },
+        "funding": {
+          "type": "string"
+        },
+        "deadline": {
+          "$ref": "#/$defs/date"
+        },
+        "url": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "",
+            "Interested",
+            "Preparing",
+            "Applied",
+            "Interview",
+            "Offer",
+            "Rejected",
+            "Withdrawn"
+          ]
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "documentsRequired": {
+          "type": "string"
+        },
+        "applicationCost": {
+          "type": "string",
+          "pattern": "^(?:|[0-9]+(?:\\.[0-9]+)?)$"
+        },
+        "decisionDate": {
+          "$ref": "#/$defs/date"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "letters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "subject"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "type": {
+          "enum": [
+            "",
+            "First contact",
+            "Follow-up",
+            "Statement of purpose",
+            "Motivation letter",
+            "Thank you",
+            "Other"
+          ]
+        },
+        "professorId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "positionId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "subject": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "status": {
+          "enum": [
+            "",
+            "Draft",
+            "Ready",
+            "Sent",
+            "Replied"
+          ]
+        },
+        "sentDate": {
+          "$ref": "#/$defs/date"
+        },
+        "followUp": {
+          "$ref": "#/$defs/date"
+        },
+        "template": {
+          "enum": [
+            "",
+            "Custom",
+            "First contact",
+            "Follow-up",
+            "Thank you",
+            "Interview reply"
+          ]
+        },
+        "body": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "preview": {
+          "type": "string"
+        }
+      }
+    },
+    "events": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "date"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "$ref": "#/$defs/date"
+        },
+        "time": {
+          "$ref": "#/$defs/time"
+        },
+        "type": {
+          "enum": [
+            "",
+            "Deadline",
+            "Interview",
+            "Follow-up",
+            "Meeting",
+            "Exam",
+            "Other"
+          ]
+        },
+        "positionId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "professorId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "universityId": {
+          "$ref": "#/$defs/optionalId"
+        }
+      }
+    },
+    "tasks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "done"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "due": {
+          "$ref": "#/$defs/date"
+        },
+        "priority": {
+          "enum": [
+            "",
+            "Low",
+            "Medium",
+            "High"
+          ]
+        },
+        "positionId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "done": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "professorId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "universityId": {
+          "$ref": "#/$defs/optionalId"
+        }
+      }
+    },
+    "correspondence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subject"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "subject": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "professorId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "positionId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "direction": {
+          "enum": [
+            "",
+            "Outgoing",
+            "Incoming"
+          ]
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "outcome": {
+          "enum": [
+            "",
+            "Sent",
+            "Replied",
+            "Interested",
+            "Declined",
+            "Follow-up required",
+            "Other"
+          ]
+        },
+        "nextFollowUp": {
+          "$ref": "#/$defs/date"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "documents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "category": {
+          "enum": [
+            "",
+            "CV",
+            "SOP",
+            "Transcript",
+            "Recommendation",
+            "Language test",
+            "Portfolio",
+            "Other"
+          ]
+        },
+        "positionId": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "",
+            "Draft",
+            "Ready",
+            "Submitted",
+            "Needs revision"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        }
+      }
+    },
+    "checklistItems": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "positionId",
+        "title",
+        "done"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "positionId": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "done": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

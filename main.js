@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const { merge } = require("./merge");
+const windowIcon = path.join(__dirname, "assets", "icon.png");
 let pendingMerge = null;
 let win;
 const empty = () => ({
@@ -40,6 +41,7 @@ function openLetterPreview(html) {
     throw Error("Preview is too large");
   if (previewWindow && !previewWindow.isDestroyed()) previewWindow.close();
   previewWindow = new BrowserWindow({
+    icon: windowIcon,
     width: 850,
     height: 850,
     minWidth: 500,
@@ -68,6 +70,7 @@ function openLetterPreview(html) {
 }
 function create() {
   win = new BrowserWindow({
+    icon: windowIcon,
     width: 1480,
     height: 920,
     minWidth: 940,

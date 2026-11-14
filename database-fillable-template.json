@@ -1,0 +1,145 @@
+{
+  "universities": [
+    {
+      "id": "",
+      "name": "",
+      "country": "",
+      "city": "",
+      "ranking": "",
+      "acceptanceRate": "",
+      "deadline": "",
+      "scholarship": "",
+      "website": "",
+      "tuition": "",
+      "applicationFee": "",
+      "language": "",
+      "funding": "",
+      "notes": "",
+      "createdAt": ""
+    }
+  ],
+  "professors": [
+    {
+      "id": "",
+      "name": "",
+      "universityId": "",
+      "department": "",
+      "email": "",
+      "research": "",
+      "publications": "",
+      "fit": "",
+      "website": "",
+      "status": "",
+      "lastContact": "",
+      "followUp": "",
+      "notes": "",
+      "createdAt": ""
+    }
+  ],
+  "positions": [
+    {
+      "id": "",
+      "title": "",
+      "degree": "",
+      "universityId": "",
+      "professorId": "",
+      "field": "",
+      "funding": "",
+      "deadline": "",
+      "url": "",
+      "status": "",
+      "requirements": "",
+      "documentsRequired": "",
+      "applicationCost": "",
+      "decisionDate": "",
+      "notes": "",
+      "createdAt": ""
+    }
+  ],
+  "letters": [
+    {
+      "id": "",
+      "title": "",
+      "type": "",
+      "professorId": "",
+      "positionId": "",
+      "subject": "",
+      "status": "",
+      "sentDate": "",
+      "followUp": "",
+      "template": "",
+      "body": "",
+      "createdAt": "",
+      "preview": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "",
+      "title": "",
+      "date": "",
+      "time": "",
+      "type": "",
+      "positionId": "",
+      "notes": "",
+      "createdAt": "",
+      "professorId": "",
+      "universityId": ""
+    }
+  ],
+  "tasks": [
+    {
+      "id": "",
+      "title": "",
+      "due": "",
+      "priority": "",
+      "positionId": "",
+      "done": false,
+      "notes": "",
+      "createdAt": "",
+      "professorId": "",
+      "universityId": ""
+    }
+  ],
+  "correspondence": [
+    {
+      "id": "",
+      "subject": "",
+      "professorId": "",
+      "positionId": "",
+      "direction": "",
+      "date": "",
+      "outcome": "",
+      "nextFollowUp": "",
+      "notes": "",
+      "createdAt": ""
+    }
+  ],
+  "documents": [
+    {
+      "id": "",
+      "title": "",
+      "category": "",
+      "positionId": "",
+      "version": "",
+      "status": "",
+      "notes": "",
+      "createdAt": "",
+      "fileName": "",
+      "filePath": ""
+    }
+  ],
+  "checklistItems": [
+    {
+      "id": "",
+      "positionId": "",
+      "title": "",
+      "done": false
+    }
+  ],
+  "settings": {
+    "yourName": "",
+    "comparisonIds": [],
+    "checklistPosition": ""
+  }
+}

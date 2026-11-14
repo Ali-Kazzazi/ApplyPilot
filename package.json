@@ -12,7 +12,8 @@
     "build:installer": "electron-builder --win nsis"
   },
   "devDependencies": {
-    "electron": "^44.9.0"
+    "electron": "^44.9.0",
+    "electron-builder": "^26.18.0"
   },
   "build": {
     "appId": "com.applypilot.desktop",
@@ -26,6 +27,7 @@
       "!*.zip"
     ],
     "win": {
+      "icon": "assets/icon.ico",
       "target": [
         {
           "target": "nsis",
@@ -48,7 +50,7 @@
       "createStartMenuShortcut": true
     }
   },
-  "dependencies": {
-    "electron-builder": "^25.1.0"
+  "overrides": {
+    "minimatch@>=7.0.0 <11.0.1": "^11.0.1"
   }
 }
